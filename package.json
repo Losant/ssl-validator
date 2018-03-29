@@ -1,0 +1,19 @@
+{
+  "name": "ssl-validator",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "author": "Erin Thompson",
+  "license": "MIT",
+  "scripts": {
+    "test": "mocha --expose-gc"
+  },
+  "devDependencies": {
+    "mocha": "^5.0.4",
+    "should": "^13.2.1"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^1.6.0",
+    "pem": "^1.12.3",
+    "ramda": "^0.25.0"
+  }
+}
