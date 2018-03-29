@@ -1,0 +1,6 @@
+*.csr
+*.key
+*.pem
+node_modules
+*.log
+root/
