@@ -4,7 +4,9 @@ const {
   validKey,
   validBundle,
   validBundleCert,
-  nonMatchingKey
+  nonMatchingKey,
+  badCert,
+  badKey
 } = require('./__fixtures__/valid-ssl');
 
 const Validation = require('../lib/');
@@ -19,8 +21,8 @@ describe('Validation', () => {
     });
     it('#isValidCertKeyPair', async () => {
       (await Validation.isValidCertKeyPair(validCert, '')).should.be.false();
-    })
-    it("#validateCertToDomain", async () => {
+    });
+    it('#validateCertToDomain', async () => {
       (await Validation.isValidCertToDomain(validCert, 'google.com')).should.be.false();
     });
     it('#isValidCertBundle', async () => {
@@ -28,7 +30,7 @@ describe('Validation', () => {
     });
   });
   describe('#isValid function should return true', () => {
-   it('#isValidCert', async () => {
+    it('#isValidCert', async () => {
       (await Validation.isValidCert(validCert)).should.be.true();
     });
     it('#isValidKey', async () => {
@@ -37,7 +39,7 @@ describe('Validation', () => {
     it('#isValidCertKeyPair', async () => {
       (await Validation.isValidCertKeyPair(validCert, validKey)).should.be.true();
     });
-    it("#validateCertToDomain", async () => {
+    it('#validateCertToDomain', async () => {
       (await Validation.isValidCertToDomain(validCert, 'mycustomguy.com')).should.be.true();
     });
     it('#isValidCertBundle', async () => {
@@ -49,7 +51,7 @@ describe('Validation', () => {
       const result = await Validation.validateCert(validCert);
       should.exist(result);
     });
-    it('#vliadteCert should throw error when formatting is wrong', async () => {
+    it('#validateCert should throw error when formatting is wrong', async () => {
       let error;
       try {
         await Validation.validateCert('');
@@ -58,11 +60,20 @@ describe('Validation', () => {
       }
       error.message.should.equal('Certificate must start and end with proper formating.');
     });
+    it('#validateCert should throw error when formatted correctly but cert is still bad', async () => {
+      let error;
+      try {
+        await Validation.validateCert(badCert);
+      } catch (e) {
+        error = e;
+      }
+      should.exist(error.message);
+    });
     it('#validateKey', async () => {
       const result = await Validation.validateKey(validKey);
       should.exist(result);
     });
-    it('#vliadteKey should throw error when formatting is wrong', async () => {
+    it('#validateKey should throw error when formatting is wrong', async () => {
       let error;
       try {
         await Validation.validateKey('');
@@ -71,11 +82,20 @@ describe('Validation', () => {
       }
       error.message.should.equal('Key must start and end with proper formating.');
     });
-    it("#validateCertToDomain", async () => {
-      let result = await Validation.validateCertToDomain(validCert, 'mycustomguy.com');
+    it('#validateKey should throw error when formatted correctly but key is still bad', async () => {
+      let error;
+      try {
+        await Validation.validateCert(badKey);
+      } catch (e) {
+        error = e;
+      }
+      should.exist(error.message);
+    });
+    it('#validateCertToDomain', async () => {
+      const result = await Validation.validateCertToDomain(validCert, 'mycustomguy.com');
       should.exist(result);
     });
-    it("#validateCertToDomain should throw an error when it does not match", async () => {
+    it('#validateCertToDomain should throw an error when it does not match', async () => {
       let error;
       try {
         await Validation.validateCertToDomain(validCert, '*');
@@ -85,7 +105,7 @@ describe('Validation', () => {
       error.message.should.equal('The cert does not match the domain.');
     });
     it('#validateCertKeyPair', async () => {
-      let result = await Validation.validateCertKeyPair(validCert, validKey);
+      const result = await Validation.validateCertKeyPair(validCert, validKey);
       should.exist(result);
     });
     it('#validateCertKeyPair should error when they do not match.', async () => {
@@ -98,7 +118,7 @@ describe('Validation', () => {
       error.message.should.equal('The provided cert and key do not match.');
     });
     it('#validateCertBundle', async () => {
-      let result = await Validation.validateCertBundle(validBundle, validBundleCert);
+      const result = await Validation.validateCertBundle(validBundle, validBundleCert);
       should.exist(result);
     });
     it('#validateCertBundle should throw an error when they do not match', async () => {

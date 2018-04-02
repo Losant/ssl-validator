@@ -8,6 +8,11 @@
     "test": "test"
   },
   "scripts": {
+    "lint": "esw *.js lib test examples",
+    "lint:fix": "esw --fix *.js lib test examples",
+    "lint:watch": "esw --watch *.js lib test examples",
+    "lint:staged": "lint-staged",
+    "precommit": "lint-staged",
     "test": "mocha"
   },
   "repository": {
@@ -25,12 +30,24 @@
   "bugs": {
     "url": "https://github.com/Losant/ssl-validator/issues"
   },
+  "engines": {
+    "node": ">=8.3"
+  },
+  "lint-staged": {
+    "*.js": "esw"
+  },
   "dependencies": {
     "pem": "^1.12.3",
     "ramda": "^0.25.0"
   },
   "devDependencies": {
+    "@losant/eslint-config-losant": "^1.2.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
     "mocha": "^5.0.5",
     "should": "^13.2.1"
+  },
+  "eslintConfig": {
+    "extends": "@losant/eslint-config-losant/env/node"
   }
 }
