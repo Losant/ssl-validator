@@ -57,7 +57,7 @@ describe('Utils', () => {
       } catch (e) {
         error = e;
       }
-      error.message.should.equal('Certificate is not valid yet start date.');
+      error.message.should.equal('Certificate does not have a valid start date.');
     });
   });
 });
