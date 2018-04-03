@@ -27,7 +27,7 @@ describe('Utils', () => {
       const now = Number(new Date());
       const start = now - SIX_MONTHS;
       const end = now + SIX_MONTHS;
-      const info = { validaty: { start, end } };
+      const info = { validity: { start, end } };
       isValidDate(info).should.equal(true);
     });
     it('should return true if skipDateValidation is on', () => {
@@ -37,7 +37,7 @@ describe('Utils', () => {
       const now = Number(new Date());
       const start = now - ONE_YEAR;
       const end = now - SIX_MONTHS;
-      const info = { validaty: { start, end } };
+      const info = { validity: { start, end } };
       let error;
       try {
         isValidDate(info);
@@ -50,7 +50,7 @@ describe('Utils', () => {
       const now = Number(new Date());
       const start = now + SIX_MONTHS;
       const end = now + ONE_YEAR;
-      const info = { validaty: { start, end } };
+      const info = { validity: { start, end } };
       let error;
       try {
         isValidDate(info);
