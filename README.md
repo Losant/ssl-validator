@@ -47,11 +47,11 @@ await validateSSL(cert,
 | :----- | :--- | ------- | :---------- |
 | skipDateValidation | Boolean | false | Skip verifying the [certificate's](https://en.wikipedia.org/wiki/Public_key_certificate) and/or bundle's validity period. |
 | key | String | | When given, validates that the key and certificate are a pair. |
-| domain | String | | When given, verfifies the certificate is valid for this domain. |
+| domain | String | | When given, verifies the certificate is valid for this domain. |
 | bundle | String | | Verifies the [certificate bundle](https://www.namecheap.com/support/knowledgebase/article.aspx/986/69/what-is-ca-bundle) and certificate go together. |
 
 ### Validate SSL Cert
-This function validates that the certificate is an ssl certificates and checks to ensure the validity of the issued time, and expires time.
+This function validates that the certificate is an SSL certificates and checks to ensure the validity of the issued time, and expires time.
 
 ```javascript
 await validateSSLCert(cert, options);
@@ -59,10 +59,10 @@ await validateSSLCert(cert, options);
 
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
-| skipDateValidation | Boolean | false | Skip verifing the given certificate's validity period. |
+| skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
 
 ### Validate SSL Key
-This function validates that the certificate is an ssl certificates and checks to ensure the validity of the issued time, and expires time.
+This function validates that the certificate is an SSL certificates and checks to ensure the validity of the issued time, and expires time.
 
 ```javascript
 await validateSSLKey(key);
@@ -89,7 +89,7 @@ await validateCertKeyPair(cert, key, options);
 
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
-| skipDateValidation | Boolean | false | Skip verifing the given certificate's validity period. |
+| skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
 
 ### Validate Cert To Domain
 This functions validates the given certificate and it matches the given domain.
@@ -100,7 +100,7 @@ await validateCertToDomain(cert, key, options);
 
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
-| skipDateValidation | Boolean | false | Skip verifing the given certificate's validity period. |
+| skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
 
 ### IsValid Functions
 
