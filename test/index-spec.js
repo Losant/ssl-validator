@@ -13,11 +13,11 @@ const Validation = require('../lib/');
 
 describe('Validation', () => {
   describe('#isValid functions should return false', () => {
-    it('#isValidCert', async () => {
-      (await Validation.isValidCert('')).should.be.false();
+    it('#isValidSSLCert', async () => {
+      (await Validation.isValidSSLCert('')).should.be.false();
     });
-    it('#isValidKey', async () => {
-      (await Validation.isValidKey('')).should.be.false();
+    it('#isValidSSLKey', async () => {
+      (await Validation.isValidSSLKey('')).should.be.false();
     });
     it('#isValidCertKeyPair', async () => {
       (await Validation.isValidCertKeyPair(validCert, '')).should.be.false();
@@ -30,11 +30,11 @@ describe('Validation', () => {
     });
   });
   describe('#isValid function should return true', () => {
-    it('#isValidCert', async () => {
-      (await Validation.isValidCert(validCert)).should.be.true();
+    it('#isValidSSLCert', async () => {
+      (await Validation.isValidSSLCert(validCert)).should.be.true();
     });
-    it('#isValidKey', async () => {
-      (await Validation.isValidKey(validKey)).should.be.true();
+    it('#isValidSSLKey', async () => {
+      (await Validation.isValidSSLKey(validKey)).should.be.true();
     });
     it('#isValidCertKeyPair', async () => {
       (await Validation.isValidCertKeyPair(validCert, validKey)).should.be.true();
@@ -47,45 +47,45 @@ describe('Validation', () => {
     });
   });
   describe('Validation', () => {
-    it('#validateCert', async () => {
-      const result = await Validation.validateCert(validCert);
+    it('#validateSSLCert', async () => {
+      const result = await Validation.validateSSLCert(validCert);
       should.exist(result);
     });
-    it('#validateCert should throw error when formatting is wrong', async () => {
+    it('#validateSSLCert should throw error when formatting is wrong', async () => {
       let error;
       try {
-        await Validation.validateCert('');
+        await Validation.validateSSLCert('');
       } catch (e) {
         error = e;
       }
       error.message.should.equal('Certificate must start and end with proper formating.');
     });
-    it('#validateCert should throw error when formatted correctly but cert is still bad', async () => {
+    it('#validateSSLCert should throw error when formatted correctly but cert is still bad', async () => {
       let error;
       try {
-        await Validation.validateCert(badCert);
+        await Validation.validateSSLCert(badCert);
       } catch (e) {
         error = e;
       }
       should.exist(error.message);
     });
-    it('#validateKey', async () => {
-      const result = await Validation.validateKey(validKey);
+    it('#validateSSLKey', async () => {
+      const result = await Validation.validateSSLKey(validKey);
       should.exist(result);
     });
-    it('#validateKey should throw error when formatting is wrong', async () => {
+    it('#validateSSLKey should throw error when formatting is wrong', async () => {
       let error;
       try {
-        await Validation.validateKey('');
+        await Validation.validateSSLKey('');
       } catch (e) {
         error = e;
       }
       error.message.should.equal('Key must start and end with proper formating.');
     });
-    it('#validateKey should throw error when formatted correctly but key is still bad', async () => {
+    it('#validateSSLKey should throw error when formatted correctly but key is still bad', async () => {
       let error;
       try {
-        await Validation.validateCert(badKey);
+        await Validation.validateSSLKey(badKey);
       } catch (e) {
         error = e;
       }
