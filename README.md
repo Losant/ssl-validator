@@ -12,7 +12,7 @@ This module is a validator for SSL Certificates using the [PEM node module](http
   * [validateCertBundle](#validate-cert-bundle)
   * [validateCertKeyPair](#validate-cert-key-pair)
   * [validateCertToDomain](#validate-cert-to-domain)
-  * [isValid Functions](#is-valid-functions)
+  * [isValid Functions](#isvalid-functions)
 * [License](#license)
 
 ## Installation
@@ -71,11 +71,11 @@ await validateSSLKey(key);
 ```
 Validates the format of the key and the returns the modulus of the key.
 
-### Validate Bundle
+### Validate Cert Bundle
 This functions validates that the certificate and the bundle are certificates, and ensures that the bundle and certificate go together.
 
 ```javascript
-await validateBundle(cert, bundle, options);
+await validateCertBundle(cert, bundle, options);
 ```
 
 | Option | Type | Default | Description |
