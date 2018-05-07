@@ -11,7 +11,7 @@ describe('Utils', () => {
     it('should return true is equivalent', () => {
       isDomainMatch('google.com', 'google.com').should.equal(true);
     });
-    it('should return true for wildcards', () => {
+    it('should return true for valid wildcards, and false for invalid ones', () => {
       isDomainMatch('this.losant.com', '*.losant.com').should.equal(true);
       isDomainMatch('1234this.is.losant.com', '*.losant.com').should.equal(false);
     });
