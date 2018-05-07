@@ -13,7 +13,7 @@ describe('Utils', () => {
     });
     it('should return true for wildcards', () => {
       isDomainMatch('this.losant.com', '*.losant.com').should.equal(true);
-      isDomainMatch('1234this.is.losant.com', '*.losant.com').should.equal(true);
+      isDomainMatch('1234this.is.losant.com', '*.losant.com').should.equal(false);
     });
     it('should return false if not a subdomain', () => {
       isDomainMatch('lo.sant.com', '*.google.com').should.equal(false);
