@@ -1,6 +1,6 @@
 {
   "name": "ssl-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Validator for certificates, and keys",
   "main": "lib/index.js",
   "directories": {
