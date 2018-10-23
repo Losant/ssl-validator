@@ -1,19 +1,19 @@
 {
   "name": "ssl-validator",
-  "version": "1.0.1",
-  "description": "Validator for certificates, and keys",
+  "version": "1.0.2",
+  "description": "Validator for certificates, bundles, and keys",
   "main": "lib/index.js",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "lint": "esw *.js lib test examples",
-    "lint:fix": "esw --fix *.js lib test examples",
-    "lint:watch": "esw --watch *.js lib test examples",
-    "lint:staged": "lint-staged",
-    "precommit": "lint-staged",
-    "test": "mocha"
+    "lint": "esw . --ext .js",
+    "lint:fix": "yarn lint --fix",
+    "lint:watch": "yarn lint --watch",
+    "lint:changed": "lint-staged",
+    "test": "mocha",
+    "reinstall": "rm -rf node_modules && yarn install"
   },
   "repository": {
     "type": "git",
@@ -37,17 +37,22 @@
     "*.js": "esw"
   },
   "dependencies": {
-    "pem": "^1.12.3",
+    "pem": "^1.13.1",
     "ramda": "^0.25.0"
   },
   "devDependencies": {
-    "@losant/eslint-config-losant": "^1.3.2",
-    "husky": "^0.14.3",
-    "lint-staged": "^4.3.0",
-    "mocha": "^5.0.5",
-    "should": "^13.2.1"
+    "@losant/eslint-config-losant": "^1.3.4",
+    "husky": "^1.1.2",
+    "lint-staged": "^7.3.0",
+    "mocha": "^5.2.0",
+    "should": "^13.2.3"
   },
   "eslintConfig": {
     "extends": "@losant/eslint-config-losant/env/node"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

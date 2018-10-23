@@ -45,6 +45,7 @@ await validateSSL(cert, options);
 | bundle | String | | When given, verifies the [certificate bundle](https://www.namecheap.com/support/knowledgebase/article.aspx/986/69/what-is-ca-bundle) and certificate go together. |
 
 ### Validate SSL Cert
+
 This function validates that the certificate is an SSL certificate and checks the validity period.
 
 ```javascript
@@ -56,6 +57,7 @@ await validateSSLCert(cert, options);
 | skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
 
 ### Validate SSL Key
+
 This function validates that the certificate is an SSL certificate and checks the validity period.
 
 ```javascript
@@ -63,6 +65,7 @@ await validateSSLKey(key);
 ```
 
 ### Validate Cert Bundle
+
 This function validates that the certificate and the bundle are certificates, and ensures that the bundle and certificate go together.
 
 ```javascript
@@ -74,6 +77,7 @@ await validateCertBundle(cert, bundle, options);
 | skipDateValidation | Boolean | false | Skip verifying the certificate's and bundle's validity period. |
 
 ### Validate Cert Key Pair
+
 This function validates that the given certificate and key are a matching pair.
 
 ```javascript
@@ -85,6 +89,7 @@ await validateCertKeyPair(cert, key, options);
 | skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
 
 ### Validate Cert To Domain
+
 This function validates the given certificate and that it matches the given domain.
 
 ```javascript
