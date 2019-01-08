@@ -2,6 +2,16 @@
 
 ***
 
+## 1.0.2 - 2019-01-07
+
+- Update development/test dependencies
+- Update pem dependency
+- Update ramda dependency
+- Update license year
+- Add Node 11 to travis.yml
+
+***
+
 ## 1.0.2 - 2018-10-22
 
 - Update development/test dependencies
