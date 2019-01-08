@@ -2,7 +2,7 @@
 
 ***
 
-## 1.0.2 - 2019-01-07
+## 1.0.3 - 2019-01-07
 
 - Update development/test dependencies
 - Update pem dependency
