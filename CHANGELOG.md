@@ -1,4 +1,4 @@
-# Edge Agent Changelog
+# SSL Validator Changelog
 
 ***
 
