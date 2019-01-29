@@ -1,6 +1,6 @@
 {
   "name": "ssl-validator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Validator for certificates, bundles, and keys",
   "main": "lib/index.js",
   "directories": {
@@ -37,7 +37,7 @@
     "*.js": "esw"
   },
   "dependencies": {
-    "pem": "^1.13.2",
+    "pem": "^1.14.1",
     "ramda": "^0.26.1"
   },
   "devDependencies": {

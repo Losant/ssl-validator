@@ -2,6 +2,13 @@
 
 ***
 
+## 1.0.4 - 2019-01-07
+
+- Update pem dependency
+- Fix issue with bundle/cert check order
+
+***
+
 ## 1.0.3 - 2019-01-07
 
 - Update development/test dependencies

@@ -26,7 +26,7 @@ describe('Validation', () => {
       (await Validation.isValidCertToDomain(validCert, 'google.com')).should.be.false();
     });
     it('#isValidCertBundle', async () => {
-      (await Validation.isValidCertBundle(validBundle, '----NOT valid----')).should.be.false();
+      (await Validation.isValidCertBundle('----NOT valid----', validBundle)).should.be.false();
     });
   });
   describe('#isValid function should return true', () => {
@@ -43,7 +43,7 @@ describe('Validation', () => {
       (await Validation.isValidCertToDomain(validCert, 'mycustomguy.com')).should.be.true();
     });
     it('#isValidCertBundle', async () => {
-      (await Validation.isValidCertBundle(validBundle, validBundleCert)).should.be.true();
+      (await Validation.isValidCertBundle(validBundleCert, validBundle)).should.be.true();
     });
   });
   describe('Validation', () => {
@@ -118,13 +118,13 @@ describe('Validation', () => {
       error.message.should.equal('The provided cert and key do not match.');
     });
     it('#validateCertBundle', async () => {
-      const result = await Validation.validateCertBundle(validBundle, validBundleCert);
+      const result = await Validation.validateCertBundle(validBundleCert, validBundle);
       should.exist(result);
     });
     it('#validateCertBundle should throw an error when they do not match', async () => {
       let error;
       try {
-        await Validation.validateCertBundle(validBundle, validCert);
+        await Validation.validateCertBundle(validCert, validBundle);
       } catch (e) {
         error = e;
       }
