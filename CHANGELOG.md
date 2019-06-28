@@ -2,6 +2,14 @@
 
 ***
 
+## 1.0.5 - 2019-06-28
+
+- Update pem dependency
+- Fix a spelling errors, improved error messages
+- Add Node 12 to travis.yml
+
+***
+
 ## 1.0.4 - 2019-01-07
 
 - Update pem dependency
