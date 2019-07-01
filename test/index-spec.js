@@ -58,7 +58,7 @@ describe('Validation', () => {
       } catch (e) {
         error = e;
       }
-      error.message.should.equal('Certificate must start and end with proper formating.');
+      error.message.should.equal('Certificate must start and end with proper formatting.');
     });
     it('#validateSSLCert should throw error when formatted correctly but cert is still bad', async () => {
       let error;
@@ -80,7 +80,7 @@ describe('Validation', () => {
       } catch (e) {
         error = e;
       }
-      error.message.should.equal('Key must start and end with proper formating.');
+      error.message.should.equal('Key must start and end with proper formatting.');
     });
     it('#validateSSLKey should throw error when formatted correctly but key is still bad', async () => {
       let error;
@@ -102,7 +102,7 @@ describe('Validation', () => {
       } catch (e) {
         error = e;
       }
-      error.message.should.equal('The cert does not match the domain.');
+      error.message.should.equal('The certificate does not match the domain.');
     });
     it('#validateCertKeyPair', async () => {
       const result = await Validation.validateCertKeyPair(validCert, validKey);
@@ -115,7 +115,7 @@ describe('Validation', () => {
       } catch (e) {
         error = e;
       }
-      error.message.should.equal('The provided cert and key do not match.');
+      error.message.should.equal('The provided certificate and key do not match.');
     });
     it('#validateCertBundle', async () => {
       const result = await Validation.validateCertBundle(validBundleCert, validBundle);
