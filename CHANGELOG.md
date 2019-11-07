@@ -1,5 +1,12 @@
 # SSL Validator Changelog
 
+## Unreleased
+
+- Update development/test dependencies
+- Update pem dependency
+- Add Node 11 and 12 to travis.yml
+- Remove Node 8 and 9 from travis.yml (since mocha/eslint no longer supports them)
+
 ***
 
 ## 1.0.5 - 2019-06-28
