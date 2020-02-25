@@ -36,6 +36,10 @@ describe('Validation', () => {
       (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey,  domain: '.xxx.com', skipDateValidation: false })).should.be.false();
       (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey,  domain: 'foo.bar.xxx.com', skipDateValidation: false })).should.be.false();
       (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey,  domain: 'foobar.xxx.com', skipDateValidation: false })).should.be.true();
+      (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey,  domain: '-foo.xxx.com', skipDateValidation: false })).should.be.false();
+      (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey,  domain: '-foo-.xxx.com', skipDateValidation: false })).should.be.false();
+      (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey,  domain: 'foo-.xxx.com', skipDateValidation: false })).should.be.false();
+      (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey,  domain: ' .xxx.com', skipDateValidation: false })).should.be.false();
     });
   });
   describe('#isValid function should return true', () => {
