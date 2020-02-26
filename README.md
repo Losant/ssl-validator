@@ -34,6 +34,8 @@ All of these functions will throw an error if something is invalid, except the [
 ### Validate SSL
 
 ```javascript
+const { validateSSL } = require('ssl-validator');
+
 await validateSSL(cert, options);
 ```
 
@@ -49,6 +51,8 @@ await validateSSL(cert, options);
 This function validates that the certificate is an SSL certificate and checks the validity period.
 
 ```javascript
+const { validateSSLCert } = require('ssl-validator');
+
 await validateSSLCert(cert, options);
 ```
 
@@ -61,6 +65,8 @@ await validateSSLCert(cert, options);
 This function validates that the certificate is an SSL certificate and checks the validity period.
 
 ```javascript
+const { validateSSLKey } = require('ssl-validator');
+
 await validateSSLKey(key);
 ```
 
@@ -69,6 +75,8 @@ await validateSSLKey(key);
 This function validates that the certificate and the bundle are certificates, and ensures that the bundle and certificate go together.
 
 ```javascript
+const { validateCertBundle } = require('ssl-validator');
+
 await validateCertBundle(cert, bundle, options);
 ```
 
@@ -81,6 +89,8 @@ await validateCertBundle(cert, bundle, options);
 This function validates that the given certificate and key are a matching pair.
 
 ```javascript
+const { validateCertKeyPair } = require('ssl-validator');
+
 await validateCertKeyPair(cert, key, options);
 ```
 
@@ -93,6 +103,8 @@ await validateCertKeyPair(cert, key, options);
 This function validates the given certificate and that it matches the given domain.
 
 ```javascript
+const { validateCertToDomain } = require('ssl-validator');
+
 await validateCertToDomain(cert, domain, options);
 ```
 
@@ -114,6 +126,8 @@ Each of the functions listed above (validateSSL, validateSSLCert, etc.) has a co
 | validateCertToDomain | isValidCertToDomain |
 
 ```javascript
+const { isValidSSL } = require('ssl-validator');
+
 if (!(await isValidSSL(cert))) {
   return { message: 'Sorry, the certificate supplied is not valid.' };
 }
