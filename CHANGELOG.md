@@ -7,8 +7,8 @@
 - fixed domainRegTest and added tests around validation of domains to wildcard certs
 - Update development/test dependencies
 - Update pem dependency
-- Add Node 11 and 12 to travis.yml
-- Remove Node 8 and 9 from travis.yml (since mocha/eslint no longer supports them)
+- Add Node 11, 12, and 13 to travis.yml
+- Remove Node 8 and 9 from travis.yml (since mocha/eslint no longer support them). Note that ssl-validator itself still works on node 8/9.
 
 ***
 
