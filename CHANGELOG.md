@@ -1,7 +1,10 @@
 # SSL Validator Changelog
 
-## Unreleased
+## 1.0.6 - 2020-02-25
 
+- update ramda dependency to `0.27.0`
+- added missing async keyword to the function validateSSLKey
+- fixed domainRegTest and added tests around validation of domains to wildcard certs
 - Update development/test dependencies
 - Update pem dependency
 - Add Node 11 and 12 to travis.yml
