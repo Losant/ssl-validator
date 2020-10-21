@@ -1,5 +1,12 @@
 # SSL Validator Changelog
 
+## 1.0.7 - 2020-10-22
+
+- Update development/test dependencies.
+- Update ramda dependency to `0.27.1`.
+- Add Node 14 and 15 to travis.yml.
+- Fix a few minor linting issues.
+
 ## 1.0.6 - 2020-02-25
 
 - update ramda dependency to `0.27.0`
