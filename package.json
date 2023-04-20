@@ -1,6 +1,6 @@
 {
   "name": "ssl-validator",
-  "version": "1.0.8",
+  "version": "2.0.0",
   "description": "Validator for certificates, bundles, and keys",
   "main": "lib/index.js",
   "directories": {
@@ -13,7 +13,8 @@
     "lint:watch": "yarn lint --watch",
     "lint:changed": "lint-staged",
     "test": "mocha",
-    "reinstall": "rm -rf node_modules && yarn install"
+    "reinstall": "rm -rf node_modules && yarn install",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -37,23 +38,18 @@
     "*.js": "esw"
   },
   "dependencies": {
-    "pem": "^1.14.4",
+    "pem": "^1.14.7",
     "ramda": "^0.29.0"
   },
   "devDependencies": {
     "@losant/eslint-config-losant": "^1.6.1",
-    "husky": "^4.3.0",
-    "lint-staged": "^10.4.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
     "mocha": "^10.2.0",
     "should": "^13.2.3"
   },
   "eslintConfig": {
     "extends": "@losant/eslint-config-losant/env/node"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "mocha": {
     "reporter": "spec",
