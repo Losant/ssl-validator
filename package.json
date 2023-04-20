@@ -1,6 +1,6 @@
 {
   "name": "ssl-validator",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Validator for certificates, bundles, and keys",
   "main": "lib/index.js",
   "directories": {
@@ -31,20 +31,20 @@
     "url": "https://github.com/Losant/ssl-validator/issues"
   },
   "engines": {
-    "node": ">=8.3"
+    "node": ">=14"
   },
   "lint-staged": {
     "*.js": "esw"
   },
   "dependencies": {
     "pem": "^1.14.4",
-    "ramda": "^0.27.1"
+    "ramda": "^0.29.0"
   },
   "devDependencies": {
-    "@losant/eslint-config-losant": "^1.4.0",
+    "@losant/eslint-config-losant": "^1.6.1",
     "husky": "^4.3.0",
     "lint-staged": "^10.4.2",
-    "mocha": "^8.2.0",
+    "mocha": "^10.2.0",
     "should": "^13.2.3"
   },
   "eslintConfig": {

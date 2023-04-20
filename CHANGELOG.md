@@ -1,5 +1,10 @@
 # SSL Validator Changelog
 
+## 1.0.8 - 2023-04-20
+
+- Only supports node version 14 or higher.
+- Upgrade dependencies including pem to `v1.14.4` and ramda to `v0.29.0`.
+
 ## 1.0.7 - 2020-10-22
 
 - Update development/test dependencies.

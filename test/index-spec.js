@@ -7,7 +7,9 @@ const {
   nonMatchingKey,
   badCert,
   badKey,
+  expiredWildCardCert,
   validWildCardCert,
+  expiredWildCardKey,
   validWildCardKey
 } = require('./__fixtures__/valid-ssl');
 
@@ -40,6 +42,17 @@ describe('Validation', () => {
       (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey, domain: '-foo-.xxx.com', skipDateValidation: false })).should.be.false();
       (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey, domain: 'foo-.xxx.com', skipDateValidation: false })).should.be.false();
       (await Validation.isValidSSL(validWildCardCert, { key: validWildCardKey, domain: ' .xxx.com', skipDateValidation: false })).should.be.false();
+    });
+    it('should validate with expired wildcard cert', async () => {
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: 'm.xxx.com', skipDateValidation: true })).should.be.true();
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: 'xxx.com', skipDateValidation: true })).should.be.false();
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: '.xxx.com', skipDateValidation: true })).should.be.false();
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: 'foo.bar.xxx.com', skipDateValidation: true })).should.be.false();
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: 'foobar.xxx.com', skipDateValidation: true })).should.be.true();
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: '-foo.xxx.com', skipDateValidation: true })).should.be.false();
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: '-foo-.xxx.com', skipDateValidation: true })).should.be.false();
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: 'foo-.xxx.com', skipDateValidation: true })).should.be.false();
+      (await Validation.isValidSSL(expiredWildCardCert, { key: expiredWildCardKey, domain: ' .xxx.com', skipDateValidation: true })).should.be.false();
     });
   });
   describe('#isValid function should return true', () => {
