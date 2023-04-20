@@ -1,7 +1,9 @@
 language: node_js
-node_js:
-  - "10"
-  - "12"
-  - "13"
-  - "14"
-  - "15"
+jobs:
+  include:
+  - dist: focal
+    node_js: '19'
+  - dist: focal
+    node_js: '18'
+  - node_js: '16'
+  - node_js: '14'
