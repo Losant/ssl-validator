@@ -10,7 +10,8 @@ const {
   expiredWildCardCert,
   validWildCardCert,
   expiredWildCardKey,
-  validWildCardKey
+  validWildCardKey,
+  passwordProtectedKey
 } = require('./__fixtures__/valid-ssl');
 
 const Validation = require('../lib/');
@@ -61,6 +62,9 @@ describe('Validation', () => {
     });
     it('#isValidSSLKey', async () => {
       (await Validation.isValidSSLKey(validKey)).should.be.true();
+      (await Validation.isValidSSLKey(validKey, { password: ' ' })).should.be.true();
+      (await Validation.isValidSSLKey(passwordProtectedKey, { password: 'asdfASDF', skipDateValidation: true })).should.be.false();
+      (await Validation.isValidSSLKey(passwordProtectedKey, { password: ' ', skipDateValidation: true })).should.be.false();
     });
     it('#isValidCertKeyPair', async () => {
       (await Validation.isValidCertKeyPair(validCert, validKey)).should.be.true();
@@ -107,6 +111,10 @@ describe('Validation', () => {
     });
     it('#validateSSLKey should throw error when formatted correctly but key is still bad', async () => {
       await Validation.validateSSLKey(badKey).should.be.rejected();
+    });
+    it('#validateSSLKey should throw an error from pem when attempting to getModlus from a password encrypted key', async () => {
+      const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ' }).catch((e) => { return e; });
+      error.message.includes('Invalid openssl exit code: 1').should.be.true();
     });
     it('#validateCertToDomain', async () => {
       const result = await Validation.validateCertToDomain(validCert, 'mycustomguy.com');
