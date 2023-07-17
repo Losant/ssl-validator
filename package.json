@@ -38,13 +38,13 @@
     "*.js": "esw"
   },
   "dependencies": {
-    "pem": "^1.14.7",
+    "pem": "^1.14.8",
     "ramda": "^0.29.0"
   },
   "devDependencies": {
     "@losant/eslint-config-losant": "^1.6.1",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.1",
+    "lint-staged": "^13.2.3",
     "mocha": "^10.2.0",
     "should": "^13.2.3"
   },
