@@ -1,5 +1,10 @@
 # SSL Validator Changelog
 
+## 2.0.1 - 2023-04-20
+
+- Upgraded various dependencies & dev dependencies
+- New option password to be set on `validateSSLKey` and `validateSSL`
+
 ## 2.0.0 - 2023-04-20
 
 - Only supports node version 14 or higher.
