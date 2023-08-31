@@ -11,7 +11,9 @@ const {
   validWildCardCert,
   expiredWildCardKey,
   validWildCardKey,
-  passwordProtectedKey
+  passwordProtectedKey,
+  ecdsaCert,
+  ecdsaKey
 } = require('./__fixtures__/valid-ssl');
 
 const Validation = require('../lib/');
@@ -100,9 +102,7 @@ describe('Validation', () => {
     });
     it('#validateSSLKey', async () => {
       const result = await Validation.validateSSLKey(validKey);
-      result.should.deepEqual({
-        modulus: 'B0CBB05C2655CA93076A298B2386E0D1FEF8647E062E5293317B1A4BBE21E4693367E6C4B1C983AE8C8CEE03D7128735F1D7FE79E70A1B5C3453D820B7EF683AA743B970810D03F29B0DA8337F1D84BEF37E640846CA812424B4CE1522A3F5DBE85E789E5172201B7A028CA8A49141E3EAC90FF2F180F60134A20CBF811CF26217B4A9BA51592FDDF4F1DB776F88BBD5EFD227127C8EDFA56AB3E901E7F29F29669EAB3A8D6396B7CF74DF3683BEFE86E4D1AC99138A68FAA93194B1290BC25F4DFDF517686A9C2895B532C15851A2C5BAB2199155EED2700CBCD1FB2FBCAB0E49C3F17AFDD47119085F187681BB5834FC13787528BB65D8D558899A6B550147'
-      });
+      result.should.deepEqual('-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsMuwXCZVypMHaimLI4bg\n0f74ZH4GLlKTMXsaS74h5GkzZ+bEscmDroyM7gPXEoc18df+eecKG1w0U9ggt+9o\nOqdDuXCBDQPymw2oM38dhL7zfmQIRsqBJCS0zhUio/Xb6F54nlFyIBt6AoyopJFB\n4+rJD/LxgPYBNKIMv4Ec8mIXtKm6UVkv3fTx23dviLvV79InEnyO36Vqs+kB5/Kf\nKWaeqzqNY5a3z3TfNoO+/obk0ayZE4po+qkxlLEpC8JfTf31F2hqnCiVtTLBWFGi\nxbqyGZFV7tJwDLzR+y+8qw5Jw/F6/dRxGQhfGHaBu1g0/BN4dSi7ZdjVWImaa1UB\nRwIDAQAB\n-----END PUBLIC KEY-----');
     });
     it('#validateSSLKey should throw error when formatting is wrong', async () => {
       await Validation.validateSSLKey('').should.be.rejectedWith({
@@ -112,7 +112,7 @@ describe('Validation', () => {
     it('#validateSSLKey should throw error when formatted correctly but key is still bad', async () => {
       await Validation.validateSSLKey(badKey).should.be.rejected();
     });
-    it('#validateSSLKey should throw an error from pem when attempting to getModlus from a password encrypted key', async () => {
+    it('#validateSSLKey should throw an error from pem when attempting to getPublicKey from a password encrypted key', async () => {
       const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ' }).catch((e) => { return e; });
       error.message.includes('Invalid openssl exit code: 1').should.be.true();
     });
@@ -142,6 +142,39 @@ describe('Validation', () => {
       await Validation.validateCertBundle(validCert, validBundle).should.be.rejectedWith({
         message: 'Bundle does not match the certificate.'
       });
+    });
+
+    it('correctly validates ecdsa keys', async () => {
+      const expectedPubKey = '-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn/3yQ9oI/KwUjV6uk86GBDJNPka3\noxo4UiDm75F8FaqSiPrapu0CuHmcc4/n+EyTKX5U2K5kROwVBDqYJMno5A==\n-----END PUBLIC KEY-----';
+      await Validation.validateSSLKey(ecdsaKey).should.be.resolvedWith(expectedPubKey);
+      await Validation.validateSSL(ecdsaCert, { key: ecdsaKey, domain: 'test.testing.test' })
+        .should.be.resolvedWith({
+          certInfo: {
+            issuer: {
+              country: 'US',
+              state: 'Test',
+              locality: 'Testing',
+              organization: 'More Testing',
+              organizationUnit: 'Test Away',
+              commonName: 'test.testing.test',
+              dc: ''
+            },
+            serial: '0f:31:fb:56:70:e7:da:1d:0b:0d:84:cb:61:76:3b:dd:27:e0:8f:d8',
+            country: 'US',
+            state: 'Test',
+            locality: 'Testing',
+            organization: 'More Testing',
+            organizationUnit: 'Test Away',
+            commonName: 'test.testing.test',
+            emailAddress: 'test@test.test',
+            dc: '',
+            validity: { start: 1693497392000, end: 33229497392000 },
+            signatureAlgorithm: 'ecdsa-with-SHA256',
+            publicKeySize: '256 bit',
+            publicKeyAlgorithm: 'id-ecPublicKey'
+          },
+          publicKey: expectedPubKey
+        });
     });
   });
 });
