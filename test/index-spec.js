@@ -100,9 +100,9 @@ describe('Validation', () => {
     it('#validateSSLCert should throw error when formatted correctly but cert is still bad', async () => {
       await Validation.validateSSLCert(badCert).should.be.rejected();
     });
-    it('#validateSSLCert should throw error when the custom validCertFormat function returns false', async () => {
-      await Validation.validateSSLCert(badCert, { validCertFormat: () => { return false; } }).should.be.rejectedWith({
-        message: 'Certificate must start and end with proper formatting.'
+    it('#validateSSLCert should throw error from openssl when cert format validation is skipped', async () => {
+      await Validation.validateSSLCert('', { skipFormatValidation: true }).should.be.rejectedWith({
+        message: 'Invalid openssl exit code: 1\n% openssl x509 -noout -nameopt RFC2253,sep_multiline,space_eq,-esc_msb,utf8 -text -in --TMPFILE--\nCould not open file or uri for loading certificate from --TMPFILE--: No such file or directory\n'
       });
     });
     it('#validateSSLKey', async () => {
@@ -117,9 +117,9 @@ describe('Validation', () => {
     it('#validateSSLKey should throw error when formatted correctly but key is still bad', async () => {
       await Validation.validateSSLKey(badKey).should.be.rejected();
     });
-    it('#validateSSLKey should throw error when the custom validKeyFormat function returns false', async () => {
-      await Validation.validateSSLKey(badKey, { validKeyFormat: () => { return false; } }).should.be.rejectedWith({
-        message: 'Key must start and end with proper formatting.'
+    it('#validateSSLKey should throw error from openssl when key format validation is skipped', async () => {
+      await Validation.validateSSLKey('', { skipFormatValidation: true }).should.be.rejectedWith({
+        message: 'Invalid openssl exit code: 1\n% openssl x509 -in --TMPFILE-- -pubkey -noout\nCould not open file or uri for loading certificate from --TMPFILE--: No such file or directory\n'
       });
     });
     it('#validateSSLKey should throw an error from pem when attempting to getPublicKey from a password encrypted key', async () => {
