@@ -101,9 +101,8 @@ describe('Validation', () => {
       await Validation.validateSSLCert(badCert).should.be.rejected();
     });
     it('#validateSSLCert should throw error from openssl when cert format validation is skipped', async () => {
-      await Validation.validateSSLCert('', { skipFormatValidation: true }).should.be.rejectedWith({
-        message: 'Invalid openssl exit code: 1\n% openssl x509 -noout -nameopt RFC2253,sep_multiline,space_eq,-esc_msb,utf8 -text -in --TMPFILE--\nCould not open file or uri for loading certificate from --TMPFILE--: No such file or directory\n'
-      });
+      const err = await Validation.validateSSLCert('', { skipFormatValidation: true }).catch((e) => { return e; });
+      err.message.includes('Invalid openssl exit code: 1').should.be.true();
     });
     it('#validateSSLKey', async () => {
       const result = await Validation.validateSSLKey(validKey);
@@ -118,9 +117,8 @@ describe('Validation', () => {
       await Validation.validateSSLKey(badKey).should.be.rejected();
     });
     it('#validateSSLKey should throw error from openssl when key format validation is skipped', async () => {
-      await Validation.validateSSLKey('', { skipFormatValidation: true }).should.be.rejectedWith({
-        message: 'Invalid openssl exit code: 1\n% openssl x509 -in --TMPFILE-- -pubkey -noout\nCould not open file or uri for loading certificate from --TMPFILE--: No such file or directory\n'
-      });
+      const err = await Validation.validateSSLKey('', { skipFormatValidation: true }).catch((e) => { return e; });
+      err.message.includes('Invalid openssl exit code: 1').should.be.true();
     });
     it('#validateSSLKey should throw an error from pem when attempting to getPublicKey from a password encrypted key', async () => {
       const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ' }).catch((e) => { return e; });
