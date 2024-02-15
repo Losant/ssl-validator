@@ -100,6 +100,11 @@ describe('Validation', () => {
     it('#validateSSLCert should throw error when formatted correctly but cert is still bad', async () => {
       await Validation.validateSSLCert(badCert).should.be.rejected();
     });
+    it('#validateSSLCert should throw error when the custom validCertFormat function returns false', async () => {
+      await Validation.validateSSLCert(badCert, { validCertFormat: () => { return false; } }).should.be.rejectedWith({
+        message: 'Certificate must start and end with proper formatting.'
+      });
+    });
     it('#validateSSLKey', async () => {
       const result = await Validation.validateSSLKey(validKey);
       result.should.deepEqual('-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsMuwXCZVypMHaimLI4bg\n0f74ZH4GLlKTMXsaS74h5GkzZ+bEscmDroyM7gPXEoc18df+eecKG1w0U9ggt+9o\nOqdDuXCBDQPymw2oM38dhL7zfmQIRsqBJCS0zhUio/Xb6F54nlFyIBt6AoyopJFB\n4+rJD/LxgPYBNKIMv4Ec8mIXtKm6UVkv3fTx23dviLvV79InEnyO36Vqs+kB5/Kf\nKWaeqzqNY5a3z3TfNoO+/obk0ayZE4po+qkxlLEpC8JfTf31F2hqnCiVtTLBWFGi\nxbqyGZFV7tJwDLzR+y+8qw5Jw/F6/dRxGQhfGHaBu1g0/BN4dSi7ZdjVWImaa1UB\nRwIDAQAB\n-----END PUBLIC KEY-----');
@@ -111,6 +116,11 @@ describe('Validation', () => {
     });
     it('#validateSSLKey should throw error when formatted correctly but key is still bad', async () => {
       await Validation.validateSSLKey(badKey).should.be.rejected();
+    });
+    it('#validateSSLKey should throw error when the custom validKeyFormat function returns false', async () => {
+      await Validation.validateSSLKey(badKey, { validKeyFormat: () => { return false; } }).should.be.rejectedWith({
+        message: 'Key must start and end with proper formatting.'
+      });
     });
     it('#validateSSLKey should throw an error from pem when attempting to getPublicKey from a password encrypted key', async () => {
       const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ' }).catch((e) => { return e; });
