@@ -7,4 +7,3 @@ jobs:
     node_js: '19'
   - dist: focal
     node_js: '18'
-  - node_js: '16'

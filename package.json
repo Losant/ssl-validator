@@ -32,7 +32,7 @@
     "url": "https://github.com/Losant/ssl-validator/issues"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "lint-staged": {
     "*.js": "esw"
