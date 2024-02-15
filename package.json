@@ -1,6 +1,6 @@
 {
   "name": "ssl-validator",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Validator for certificates, bundles, and keys",
   "main": "lib/index.js",
   "directories": {
@@ -39,13 +39,13 @@
   },
   "dependencies": {
     "pem": "^1.14.8",
-    "ramda": "^0.29.0"
+    "ramda": "^0.29.1"
   },
   "devDependencies": {
     "@losant/eslint-config-losant": "^1.6.1",
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
-    "mocha": "^10.2.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "mocha": "^10.3.0",
     "should": "^13.2.3"
   },
   "eslintConfig": {
