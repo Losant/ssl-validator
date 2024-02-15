@@ -1,5 +1,13 @@
 # SSL Validator Changelog
 
+## 4.0.0 - 2024-02-15
+
+- Upgraded various dependencies & dev dependencies
+- Only supports node version 18 or higher.
+- New option validKeyFormat to be set on `validateSSLKey` and `validateSSL`, which is a function that will be given the entire key and should return true or false if the key is in the valid format.
+- New option validCertFormat to be set on `validateSSLCert` and `validateSSL`, which is a function that will be given the entire cert and should return true or false if the key is in the valid format.
+- Add remove Node 16 from travis.yml.
+
 ## 3.0.0 - 2023-08-31
 
 - Upgraded various dependencies & dev dependencies
