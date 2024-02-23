@@ -1,0 +1,11 @@
+{
+  "all": true,
+  "include": [
+    "lib/**/*.js"
+  ],
+  "exclude": [
+    "test/**/*"
+  ],
+  "excludeNodeModules": true,
+  "temp-dir": "./coverage"
+}

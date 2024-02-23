@@ -65,9 +65,9 @@ describe('Validation', () => {
     it('#isValidSSLKey', async () => {
       (await Validation.isValidSSLKey(validKey)).should.be.true();
       (await Validation.isValidSSLKey(validKey, { password: ' ' })).should.be.true();
-      (await Validation.isValidSSLKey(passwordProtectedKey, { password: 'asdfASDF', skipDateValidation: true })).should.be.false();
-      (await Validation.isValidSSLKey(passwordProtectedKey, { password: ' ', skipDateValidation: true })).should.be.false();
-    });
+      (await Validation.isValidSSLKey(passwordProtectedKey, { password: 'foobar', skipDateValidation: true, skipFormatValidation: true })).should.be.true();
+      (await Validation.isValidSSLKey(passwordProtectedKey, { password: ' ', skipDateValidation: true, skipFormatValidation: true })).should.be.false();
+    }).timeout(5000);
     it('#isValidCertKeyPair', async () => {
       (await Validation.isValidCertKeyPair(validCert, validKey)).should.be.true();
     });
@@ -100,6 +100,10 @@ describe('Validation', () => {
     it('#validateSSLCert should throw error when formatted correctly but cert is still bad', async () => {
       await Validation.validateSSLCert(badCert).should.be.rejected();
     });
+    it('#validateSSLCert should throw error from openssl when cert format validation is skipped', async () => {
+      const err = await Validation.validateSSLCert('', { skipFormatValidation: true }).catch((e) => { return e; });
+      err.message.includes('Invalid openssl exit code: 1').should.be.true();
+    });
     it('#validateSSLKey', async () => {
       const result = await Validation.validateSSLKey(validKey);
       result.should.deepEqual('-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsMuwXCZVypMHaimLI4bg\n0f74ZH4GLlKTMXsaS74h5GkzZ+bEscmDroyM7gPXEoc18df+eecKG1w0U9ggt+9o\nOqdDuXCBDQPymw2oM38dhL7zfmQIRsqBJCS0zhUio/Xb6F54nlFyIBt6AoyopJFB\n4+rJD/LxgPYBNKIMv4Ec8mIXtKm6UVkv3fTx23dviLvV79InEnyO36Vqs+kB5/Kf\nKWaeqzqNY5a3z3TfNoO+/obk0ayZE4po+qkxlLEpC8JfTf31F2hqnCiVtTLBWFGi\nxbqyGZFV7tJwDLzR+y+8qw5Jw/F6/dRxGQhfGHaBu1g0/BN4dSi7ZdjVWImaa1UB\nRwIDAQAB\n-----END PUBLIC KEY-----');
@@ -112,10 +116,14 @@ describe('Validation', () => {
     it('#validateSSLKey should throw error when formatted correctly but key is still bad', async () => {
       await Validation.validateSSLKey(badKey).should.be.rejected();
     });
-    it('#validateSSLKey should throw an error from pem when attempting to getPublicKey from a password encrypted key', async () => {
-      const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ' }).catch((e) => { return e; });
-      error.message.includes('Invalid openssl exit code: 1').should.be.true();
+    it('#validateSSLKey should throw error from openssl when key format validation is skipped', async () => {
+      const err = await Validation.validateSSLKey('', { skipFormatValidation: true }).catch((e) => { return e; });
+      err.message.includes('Invalid openssl exit code: 1').should.be.true();
     });
+    it('#validateSSLKey should throw an error from pem when attempting to getPublicKey from a password encrypted key', async () => {
+      const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ', skipFormatValidation: true }).catch((e) => { return e; });
+      error.message.includes('Invalid openssl exit code: 1').should.be.true();
+    }).timeout(5000);
     it('#validateCertToDomain', async () => {
       const result = await Validation.validateCertToDomain(validCert, 'mycustomguy.com');
       should.exist(result);

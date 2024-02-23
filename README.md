@@ -45,6 +45,8 @@ await validateSSL(cert, options);
 | key | String | | When given, validates that the key and certificate are a pair. |
 | domain | String | | When given, verifies the certificate is valid for this domain. e.g. `'github.com'` |
 | bundle | String | | When given, verifies the [certificate bundle](https://www.namecheap.com/support/knowledgebase/article.aspx/986/69/what-is-ca-bundle) and certificate go together. |
+| skipFormatValidation | Boolean | false | When true skip validation the format of the certificate and the key. |
+| password | String | | A password that will be given to openssl when verfiying the key. |
 
 ### Validate SSL Cert
 
@@ -59,6 +61,7 @@ await validateSSLCert(cert, options);
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
 | skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
+| skipFormatValidation | Boolean | false | When true, skip validation the format of the certificate. | 
 
 ### Validate SSL Key
 
@@ -67,8 +70,14 @@ This function validates that the certificate is an SSL certificate and checks th
 ```javascript
 const { validateSSLKey } = require('ssl-validator');
 
-await validateSSLKey(key);
+await validateSSLKey(key, options);
 ```
+
+| Option | Type | Default | Description |
+| :----- | :--- | ------- | :---------- |
+| password | String | | A password that will be given to openssl when verfiying the key. |
+| skipFormatValidation | Boolean | false | When true, skip validation the format of the key. | 
+
 
 ### Validate Cert Bundle
 
@@ -82,7 +91,11 @@ await validateCertBundle(cert, bundle, options);
 
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
-| skipDateValidation | Boolean | false | Skip verifying the certificate's and bundle's validity period. |
+| skipDateValidation | Boolean | false | Skip verifying the [certificate's](https://en.wikipedia.org/wiki/Public_key_certificate) and/or bundle's validity period. |
+| key | String | | When given, validates that the key and certificate are a pair. |
+| domain | String | | When given, verifies the certificate is valid for this domain. e.g. `'github.com'` |
+| skipFormatValidation | Boolean | false | When true skip validation the format of the certificate and the key. |
+| password | String | | A password that will be given to openssl when verfiying the key. |
 
 ### Validate Cert Key Pair
 
@@ -96,7 +109,11 @@ await validateCertKeyPair(cert, key, options);
 
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
-| skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
+| skipDateValidation | Boolean | false | Skip verifying the [certificate's](https://en.wikipedia.org/wiki/Public_key_certificate) and/or bundle's validity period. |
+| domain | String | | When given, verifies the certificate is valid for this domain. e.g. `'github.com'` |
+| bundle | String | | When given, verifies the [certificate bundle](https://www.namecheap.com/support/knowledgebase/article.aspx/986/69/what-is-ca-bundle) and certificate go together. |
+| skipFormatValidation | Boolean | false | When true skip validation the format of the certificate and the key. |
+| password | String | | A password that will be given to openssl when verfiying the key. |
 
 ### Validate Cert To Domain
 
@@ -110,7 +127,11 @@ await validateCertToDomain(cert, domain, options);
 
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
-| skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
+| skipDateValidation | Boolean | false | Skip verifying the [certificate's](https://en.wikipedia.org/wiki/Public_key_certificate) and/or bundle's validity period. |
+| key | String | | When given, validates that the key and certificate are a pair. |
+| bundle | String | | When given, verifies the [certificate bundle](https://www.namecheap.com/support/knowledgebase/article.aspx/986/69/what-is-ca-bundle) and certificate go together. |
+| skipFormatValidation | Boolean | false | When true skip validation the format of the certificate and the key. |
+| password | String | | A password that will be given to openssl when verfiying the key. |
 
 ### IsValid Functions
 

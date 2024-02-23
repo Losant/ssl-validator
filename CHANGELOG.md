@@ -1,5 +1,12 @@
 # SSL Validator Changelog
 
+## 4.0.0 - 2024-02-15
+
+- Upgraded various dependencies & dev dependencies
+- Only supports node version 18 or higher.
+- New option skipFormatValdiation to be set on `validateSSLKey`, `validateSSL`, `validateSSLCert` to skip header and footer key and certification validation.
+- Add remove Node 16 from travis.yml.
+
 ## 3.0.0 - 2023-08-31
 
 - Upgraded various dependencies & dev dependencies
