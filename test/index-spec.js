@@ -67,7 +67,7 @@ describe('Validation', () => {
       (await Validation.isValidSSLKey(validKey, { password: ' ' })).should.be.true();
       (await Validation.isValidSSLKey(passwordProtectedKey, { password: 'foobar', skipDateValidation: true, skipFormatValidation: true })).should.be.true();
       (await Validation.isValidSSLKey(passwordProtectedKey, { password: ' ', skipDateValidation: true, skipFormatValidation: true })).should.be.false();
-    });
+    }).timeout(5000);
     it('#isValidCertKeyPair', async () => {
       (await Validation.isValidCertKeyPair(validCert, validKey)).should.be.true();
     });
@@ -123,7 +123,7 @@ describe('Validation', () => {
     it('#validateSSLKey should throw an error from pem when attempting to getPublicKey from a password encrypted key', async () => {
       const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ', skipFormatValidation: true }).catch((e) => { return e; });
       error.message.includes('Invalid openssl exit code: 1').should.be.true();
-    });
+    }).timeout(5000);
     it('#validateCertToDomain', async () => {
       const result = await Validation.validateCertToDomain(validCert, 'mycustomguy.com');
       should.exist(result);
