@@ -1,9 +1,9 @@
 language: node_js
 jobs:
   include:
-  - dist: focal
+  - dist: jammy
     node_js: '20'
-  - dist: focal
+  - dist: jammy
     node_js: '19'
-  - dist: focal
+  - dist: jammy
     node_js: '18'
