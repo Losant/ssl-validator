@@ -65,8 +65,8 @@ describe('Validation', () => {
     it('#isValidSSLKey', async () => {
       (await Validation.isValidSSLKey(validKey)).should.be.true();
       (await Validation.isValidSSLKey(validKey, { password: ' ' })).should.be.true();
-      (await Validation.isValidSSLKey(passwordProtectedKey, { password: 'asdfASDF', skipDateValidation: true })).should.be.false();
-      (await Validation.isValidSSLKey(passwordProtectedKey, { password: ' ', skipDateValidation: true })).should.be.false();
+      (await Validation.isValidSSLKey(passwordProtectedKey, { password: 'foobar', skipDateValidation: true, skipFormatValidation: true })).should.be.true();
+      (await Validation.isValidSSLKey(passwordProtectedKey, { password: ' ', skipDateValidation: true, skipFormatValidation: true })).should.be.false();
     });
     it('#isValidCertKeyPair', async () => {
       (await Validation.isValidCertKeyPair(validCert, validKey)).should.be.true();
@@ -121,7 +121,7 @@ describe('Validation', () => {
       err.message.includes('Invalid openssl exit code: 1').should.be.true();
     });
     it('#validateSSLKey should throw an error from pem when attempting to getPublicKey from a password encrypted key', async () => {
-      const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ' }).catch((e) => { return e; });
+      const error = await Validation.validateSSLKey(passwordProtectedKey, { password: ' ', skipFormatValidation: true }).catch((e) => { return e; });
       error.message.includes('Invalid openssl exit code: 1').should.be.true();
     });
     it('#validateCertToDomain', async () => {
