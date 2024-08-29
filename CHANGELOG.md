@@ -1,5 +1,11 @@
 # SSL Validator Changelog
 
+## 4.1.0 - 2024-08-29
+
+- Upgraded various dependencies & dev dependencies
+- Replaced main index file with exact module.exports functions instead of building the module.export object.
+- Replaced travis with github actions.
+
 ## 4.0.0 - 2024-02-15
 
 - Upgraded various dependencies & dev dependencies
