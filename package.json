@@ -14,7 +14,7 @@
     "lint:changed": "lint-staged",
     "test": "mocha",
     "reinstall": "rm -rf node_modules && yarn install",
-    "prepare": "husky install",
+    "prepare": "husky",
     "coverage": "nyc yarn run test"
   },
   "repository": {
