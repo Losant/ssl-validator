@@ -40,14 +40,14 @@
   },
   "dependencies": {
     "pem": "^1.14.8",
-    "ramda": "^0.29.1"
+    "ramda": "^0.30.1"
   },
   "devDependencies": {
     "@losant/eslint-config-losant": "^1.6.1",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.2",
-    "mocha": "^10.3.0",
-    "nyc": "^15.1.0",
+    "husky": "^9.1.5",
+    "lint-staged": "^15.2.9",
+    "mocha": "^10.7.3",
+    "nyc": "^17.0.0",
     "should": "^13.2.3"
   },
   "eslintConfig": {
