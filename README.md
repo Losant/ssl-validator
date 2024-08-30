@@ -2,7 +2,7 @@
 
 This module is a validator for SSL Certificates using the [PEM node module](https://www.npmjs.com/package/pem). You can validate SSL Keys, SSL Certificates, SSL Certificate Domains, SSL Certificate Bundles, etc.
 
-[![Build Status](https://travis-ci.com/Losant/ssl-validator.svg?branch=master)](https://travis-ci.com/Losant/ssl-validator) [![npm version](https://badge.fury.io/js/ssl-validator.svg)](https://badge.fury.io/js/ssl-validator)
+![Build Status](https://github.com/Losant/ssl-validator/actions/workflows/test.yml/badge.svg?branch=master) [![npm version](https://badge.fury.io/js/ssl-validator.svg)](https://badge.fury.io/js/ssl-validator)
 
 * [Installation](#installation)
 * [API Documentation](#api-documentation)
