@@ -1,20 +1,19 @@
 {
   "name": "ssl-validator",
-  "version": "4.1.0",
+  "version": "5.0.0",
   "description": "Validator for certificates, bundles, and keys",
   "main": "lib/index.js",
+  "type": "module",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
   "scripts": {
-    "lint": "esw . --ext .js",
+    "lint": "eslint . --ext .js",
     "lint:fix": "yarn lint --fix",
-    "lint:watch": "yarn lint --watch",
     "lint:changed": "lint-staged",
-    "test": "mocha",
-    "reinstall": "rm -rf node_modules && yarn install",
-    "coverage": "nyc yarn run test"
+    "test": "mocha test 2>&1",
+    "reinstall": "rm -rf node_modules && yarn install"
   },
   "repository": {
     "type": "git",
@@ -32,21 +31,20 @@
     "url": "https://github.com/Losant/ssl-validator/issues"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "lint-staged": {
-    "*.js": "esw"
+    "*.js": "eslint"
   },
   "dependencies": {
     "pem": "^1.14.8",
     "ramda": "^0.30.1"
   },
   "devDependencies": {
-    "@losant/eslint-config-losant": "^1.6.1",
-    "husky": "^9.1.5",
-    "lint-staged": "^15.2.9",
-    "mocha": "^10.7.3",
-    "nyc": "^17.0.0",
+    "@losant/eslint-config-losant": "^2.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.3",
+    "mocha": "^11.7.4",
     "should": "^13.2.3"
   },
   "eslintConfig": {

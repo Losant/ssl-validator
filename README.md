@@ -34,7 +34,7 @@ All of these functions will throw an error if something is invalid, except the [
 ### Validate SSL
 
 ```javascript
-const { validateSSL } = require('ssl-validator');
+import { validateSSL } from 'ssl-validator';
 
 await validateSSL(cert, options);
 ```
@@ -46,14 +46,14 @@ await validateSSL(cert, options);
 | domain | String | | When given, verifies the certificate is valid for this domain. e.g. `'github.com'` |
 | bundle | String | | When given, verifies the [certificate bundle](https://www.namecheap.com/support/knowledgebase/article.aspx/986/69/what-is-ca-bundle) and certificate go together. |
 | skipFormatValidation | Boolean | false | When true skip validation the format of the certificate and the key. |
-| password | String | | A password that will be given to openssl when verfiying the key. |
+| password | String | | A password that will be given to openssl when verifying the key. |
 
 ### Validate SSL Cert
 
 This function validates that the certificate is an SSL certificate and checks the validity period.
 
 ```javascript
-const { validateSSLCert } = require('ssl-validator');
+import { validateSSLCert } from 'ssl-validator';
 
 await validateSSLCert(cert, options);
 ```
@@ -61,22 +61,22 @@ await validateSSLCert(cert, options);
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
 | skipDateValidation | Boolean | false | Skip verifying the given certificate's validity period. |
-| skipFormatValidation | Boolean | false | When true, skip validation the format of the certificate. | 
+| skipFormatValidation | Boolean | false | When true, skip validation the format of the certificate. |
 
 ### Validate SSL Key
 
 This function validates that the certificate is an SSL certificate and checks the validity period.
 
 ```javascript
-const { validateSSLKey } = require('ssl-validator');
+import { validateSSLKey } from 'ssl-validator';
 
 await validateSSLKey(key, options);
 ```
 
 | Option | Type | Default | Description |
 | :----- | :--- | ------- | :---------- |
-| password | String | | A password that will be given to openssl when verfiying the key. |
-| skipFormatValidation | Boolean | false | When true, skip validation the format of the key. | 
+| password | String | | A password that will be given to openssl when verifying the key. |
+| skipFormatValidation | Boolean | false | When true, skip validation the format of the key. |
 
 
 ### Validate Cert Bundle
@@ -84,7 +84,7 @@ await validateSSLKey(key, options);
 This function validates that the certificate and the bundle are certificates, and ensures that the bundle and certificate go together.
 
 ```javascript
-const { validateCertBundle } = require('ssl-validator');
+import { validateCertBundle } from 'ssl-validator';
 
 await validateCertBundle(cert, bundle, options);
 ```
@@ -95,14 +95,14 @@ await validateCertBundle(cert, bundle, options);
 | key | String | | When given, validates that the key and certificate are a pair. |
 | domain | String | | When given, verifies the certificate is valid for this domain. e.g. `'github.com'` |
 | skipFormatValidation | Boolean | false | When true skip validation the format of the certificate and the key. |
-| password | String | | A password that will be given to openssl when verfiying the key. |
+| password | String | | A password that will be given to openssl when verifying the key. |
 
 ### Validate Cert Key Pair
 
 This function validates that the given certificate and key are a matching pair.
 
 ```javascript
-const { validateCertKeyPair } = require('ssl-validator');
+import { validateCertKeyPair } from 'ssl-validator';
 
 await validateCertKeyPair(cert, key, options);
 ```
@@ -113,14 +113,14 @@ await validateCertKeyPair(cert, key, options);
 | domain | String | | When given, verifies the certificate is valid for this domain. e.g. `'github.com'` |
 | bundle | String | | When given, verifies the [certificate bundle](https://www.namecheap.com/support/knowledgebase/article.aspx/986/69/what-is-ca-bundle) and certificate go together. |
 | skipFormatValidation | Boolean | false | When true skip validation the format of the certificate and the key. |
-| password | String | | A password that will be given to openssl when verfiying the key. |
+| password | String | | A password that will be given to openssl when verifying the key. |
 
 ### Validate Cert To Domain
 
 This function validates the given certificate and that it matches the given domain.
 
 ```javascript
-const { validateCertToDomain } = require('ssl-validator');
+import { validateCertToDomain } from 'ssl-validator');
 
 await validateCertToDomain(cert, domain, options);
 ```
@@ -131,7 +131,7 @@ await validateCertToDomain(cert, domain, options);
 | key | String | | When given, validates that the key and certificate are a pair. |
 | bundle | String | | When given, verifies the [certificate bundle](https://www.namecheap.com/support/knowledgebase/article.aspx/986/69/what-is-ca-bundle) and certificate go together. |
 | skipFormatValidation | Boolean | false | When true skip validation the format of the certificate and the key. |
-| password | String | | A password that will be given to openssl when verfiying the key. |
+| password | String | | A password that will be given to openssl when verifying the key. |
 
 ### IsValid Functions
 
@@ -147,7 +147,7 @@ Each of the functions listed above (validateSSL, validateSSLCert, etc.) has a co
 | validateCertToDomain | isValidCertToDomain |
 
 ```javascript
-const { isValidSSL } = require('ssl-validator');
+import { isValidSSL } from 'ssl-validator';
 
 if (!(await isValidSSL(cert))) {
   return { message: 'Sorry, the certificate supplied is not valid.' };
