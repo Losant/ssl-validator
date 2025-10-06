@@ -97,6 +97,11 @@ describe('Validation', () => {
         message: 'Certificate must start and end with proper formatting.'
       });
     });
+    it('#validateSSLCert should throw error when it is more than a single cert', async () => {
+      await Validation.validateSSLCert(`${validCert}\n${validCert}`).should.be.rejectedWith({
+        message: 'Value must contain a single certificate.'
+      });
+    });
     it('#validateSSLCert should throw error when formatted correctly but cert is still bad', async () => {
       await Validation.validateSSLCert(badCert).should.be.rejected();
     });
@@ -111,6 +116,11 @@ describe('Validation', () => {
     it('#validateSSLKey should throw error when formatting is wrong', async () => {
       await Validation.validateSSLKey('').should.be.rejectedWith({
         message: 'Key must start and end with proper formatting.'
+      });
+    });
+    it('#validateSSLKey should throw error when it is more than a single key', async () => {
+      await Validation.validateSSLKey(`${validKey}\n${validKey}`).should.be.rejectedWith({
+        message: 'Value must contain a single key.'
       });
     });
     it('#validateSSLKey should throw error when formatted correctly but key is still bad', async () => {
@@ -144,14 +154,20 @@ describe('Validation', () => {
     });
     it('#validateCertBundle', async () => {
       const result = await Validation.validateCertBundle(validBundleCert, validBundle);
-      should.exist(result);
+      result.bundleInfo.length.should.equal(2);
+      result.bundleInfo[0].serial.should.equal('4096 (0x1000)');
+      result.bundleInfo[1].serial.should.equal('bd:33:b1:8f:0e:c2:a1:a2');
     });
     it('#validateCertBundle should throw an error when they do not match', async () => {
       await Validation.validateCertBundle(validCert, validBundle).should.be.rejectedWith({
         message: 'Bundle does not match the certificate.'
       });
     });
-
+    it('#validateCertBundle should throw an error when the bundle contains invalid certs', async () => {
+      await Validation.validateCertBundle(validCert, `${validBundle}\n${badCert}`).should.be.rejectedWith({
+        message: 'Invalid bundle provided.'
+      });
+    });
     it('correctly validates ecdsa keys', async () => {
       const expectedPubKey = '-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEn/3yQ9oI/KwUjV6uk86GBDJNPka3\noxo4UiDm75F8FaqSiPrapu0CuHmcc4/n+EyTKX5U2K5kROwVBDqYJMno5A==\n-----END PUBLIC KEY-----';
       await Validation.validateSSLKey(ecdsaKey).should.be.resolvedWith(expectedPubKey);
