@@ -1,7 +1,7 @@
-const {
+import {
   isDomainMatch,
   isValidDate
-} = require('../lib/utils');
+} from '../lib/utils.js';
 
 const SIX_MONTHS = 180 * 24 * 60 * 60 * 1000;
 const ONE_YEAR = 365 * 24 * 60 * 60 * 1000;

@@ -1,5 +1,16 @@
 # SSL Validator Changelog
 
+## 5.0.0 - 2025-10-06
+
+- Convert to ESM.
+- Disallow passing in multiple certificates or keys at once (previously it would only validate the first one)
+- Validate each certificate in a certificate bundle individually (previously it would only validate the first one)
+- The `bundleInfo` property on a validation result is now an array, with an entry per certificate in the bundle.
+- Upgraded various dependencies & dev dependencies
+- Dropped support for node 18.
+- Add node 24 to github tests.
+- Fix expired certificate in tests.
+
 ## 4.1.0 - 2024-08-29
 
 - Upgraded various dependencies & dev dependencies
@@ -10,8 +21,8 @@
 
 - Upgraded various dependencies & dev dependencies
 - Only supports node version 18 or higher.
-- New option skipFormatValdiation to be set on `validateSSLKey`, `validateSSL`, `validateSSLCert` to skip header and footer key and certification validation.
-- Add remove Node 16 from travis.yml.
+- New option skipFormatValidation to be set on `validateSSLKey`, `validateSSL`, `validateSSLCert` to skip header and footer key and certification validation.
+- Remove Node 16 from travis.yml.
 
 ## 3.0.0 - 2023-08-31
 

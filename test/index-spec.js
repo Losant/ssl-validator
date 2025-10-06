@@ -1,5 +1,5 @@
-const should = require('should');
-const {
+import should from 'should';
+import {
   validCert,
   validKey,
   validBundle,
@@ -14,9 +14,9 @@ const {
   passwordProtectedKey,
   ecdsaCert,
   ecdsaKey
-} = require('./__fixtures__/valid-ssl');
+} from './__fixtures__/valid-ssl.js';
 
-const Validation = require('../lib/');
+import * as Validation from '../lib/index.js';
 
 describe('Validation', () => {
   describe('#isValid functions should return false', () => {
