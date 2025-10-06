@@ -13,8 +13,7 @@
     "lint:fix": "yarn lint --fix",
     "lint:changed": "lint-staged",
     "test": "mocha test 2>&1",
-    "reinstall": "rm -rf node_modules && yarn install",
-    "coverage": "nyc yarn run test"
+    "reinstall": "rm -rf node_modules && yarn install"
   },
   "repository": {
     "type": "git",
@@ -46,7 +45,6 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.2.3",
     "mocha": "^11.7.4",
-    "nyc": "^17.1.0",
     "should": "^13.2.3"
   },
   "eslintConfig": {
